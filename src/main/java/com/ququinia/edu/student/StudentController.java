@@ -27,4 +27,10 @@ public class StudentController {
                         "Student " + studentId + " does not exists"
                 ));
     }
+
+
+    public String error(){
+      return "error";
+    }
+    
 }
