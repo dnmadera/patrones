@@ -14,12 +14,41 @@
 <div class="container">
     <p>Spring Boot Security</p>
     <a href="/api/v1/students">Estudiantes</a>
-    <a href="/management/api/v1/students">Administracion</a>
+    <a href="/management/api/v1/users">Administracion</a>
+
+    <p id="info"></p>
     
     <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-primary btn-block" type="submit">Logout</button>
     </form>
 </div>
 </body>
+
+<script>
+
+        function myDisplayer(some) {
+        document.getElementById("info").innerHTML = some;
+        }
+
+    
+        let myPromise = new Promise(function(myResolve, myReject) {
+            let req = new XMLHttpRequest();
+            req.open('GET', "/management/api/v1/users");
+            req.onload = function() {
+                if (req.status == 200) {
+                myResolve(req.response);
+                } else {
+                myReject("Ha ocurrido un eror");
+                }
+            };
+            req.send();
+        });
+
+        myPromise.then(
+            function(value) {myDisplayer(value);},
+            function(error) {myDisplayer(error);}
+        );
+
+</script>
 </html>
 

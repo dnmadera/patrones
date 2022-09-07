@@ -3,6 +3,7 @@ package com.ququinia.edu.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +18,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import java.net.CookieStore;
 import java.util.concurrent.TimeUnit;
@@ -30,6 +32,9 @@ import static com.ququinia.edu.security.ApplicationUserRole.*;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
+  
+    @Resource
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) {
@@ -42,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
+                //.antMatchers("/api/**").hasRole(STUDENT.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -66,27 +71,47 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID", "remember-me")
                     .logoutSuccessUrl("/login");
     }
+   
 
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(this.passwordEncoder);
+        return authProvider;
+    }
+
+
+
+    /* 
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
         UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
-                .password(passwordEncoder.encode("password"))
+                .password(passwordEncoder.encode("123"))
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
 
+        System.out.println("password " + annaSmithUser.getPassword());
         UserDetails lindaUser = User.builder()
                 .username("linda")
-                .password(passwordEncoder.encode("password123"))
+                .password(passwordEncoder.encode("123"))
                 .authorities(ADMIN.getGrantedAuthorities())
                 .build();
 
+                System.out.println("password " + lindaUser.getPassword());
+
+
+
         UserDetails tomUser = User.builder()
                 .username("tom")
-                .password(passwordEncoder.encode("password123"))
+                .password(passwordEncoder.encode("123"))
                 .authorities(ADMINTRAINEE.getGrantedAuthorities())
                 .build();
+
+
+                System.out.println("password " + tomUser.getPassword());
 
         return new InMemoryUserDetailsManager(
                 annaSmithUser,
@@ -95,6 +120,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         );
 
     }
+
+    */
 
     public static void main(String[] args) {
         System.out.println(TimeUnit.DAYS.toSeconds(1));
