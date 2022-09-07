@@ -1,0 +1,87 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Amigoscode login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<h1>Patrones 2w</h1>
+<div class="container">
+    <p>Lista de patrones desarrollados</p>
+    <p id="info"></p>
+    <section></section>
+</div>
+    
+    
+</body>
+
+<script>
+
+
+        const header = document.querySelector('header');
+        const section = document.querySelector('section');
+        const requestURL = 'api/v1/patrones';
+
+
+
+        function myDisplayer(jsonObj) {
+            const patrones = jsonObj;
+            document.getElementById("info").innerHTML = jsonObj;
+
+
+
+            for (var i = 0; i < patrones.length; i++) {
+                const myArticle = document.createElement('article');
+                const myH2 = document.createElement('h3');
+                const myPara1 = document.createElement('p');
+                const myLink = document.createElement('a');
+                
+                
+
+                myH2.textContent = patrones[i].name;
+                myPara1.textContent = 'Descripcion: ' + patrones[i].description;
+                myLink.href= patrones[i].action;
+
+                myArticle.appendChild(myH2);
+                myArticle.appendChild(myPara1);
+                myArticle.appendChild(myLink);
+                section.appendChild(myArticle);
+            }
+
+
+        }
+
+        function myDisplayerError(some) {
+            document.getElementById("info").innerHTML = some;
+        }
+
+    
+        let myPromise = new Promise(function(myResolve, myReject) {
+            let req = new XMLHttpRequest();
+            req.open('GET', requestURL);            
+            req.onload = function() {
+                if (req.status == 200) {
+                myResolve(req.response);
+                } else {
+                myReject("Ha ocurrido un eror");
+                }
+            };
+
+
+            req.responseType = 'json';
+            req.send();
+        });
+
+        myPromise.then(
+            function(value) {myDisplayer(value);},
+            function(error) {myDisplayerError(error);}
+        );
+
+</script>
+</html>
+

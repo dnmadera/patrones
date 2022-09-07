@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ququinia.edu.service.UserService;
-import com.ququinia.edu.user.AppUser;
+import com.ququinia.edu.model.user.AppUser;
 
 @RestController
 @RequestMapping("management/api/v1/users")

@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ququinia.edu.service.UserService;
-import com.ququinia.edu.user.AppUser;
+import com.ququinia.edu.model.user.AppUser;
 
 
 @Service

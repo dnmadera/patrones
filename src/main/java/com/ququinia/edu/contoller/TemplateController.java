@@ -17,4 +17,9 @@ public class TemplateController {
     public String getCourses() {
         return "courses";
     }
+
+     @GetMapping("patrones")
+    public String getPatrones() {
+        return "patrones";
+    }
 }

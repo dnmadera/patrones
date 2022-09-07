@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ququinia.edu.repository.UserRepository;
-import com.ququinia.edu.user.AppUser;
+import com.ququinia.edu.model.user.AppUser;
 
 @Service
 class UserServiceImpl implements UserService {

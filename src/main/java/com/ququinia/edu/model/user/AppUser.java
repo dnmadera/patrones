@@ -1,4 +1,4 @@
-package com.ququinia.edu.user;
+package com.ququinia.edu.model.user;
 
 import javax.persistence.*;
 
