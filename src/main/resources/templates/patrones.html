@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Amigoscode login</title>
+    <title>Patrones</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -40,17 +40,21 @@
                 const myH2 = document.createElement('h3');
                 const myPara1 = document.createElement('p');
                 const myLink = document.createElement('a');
+                const br = document.createElement('p');
                 
                 
 
                 myH2.textContent = patrones[i].name;
                 myPara1.textContent = 'Descripcion: ' + patrones[i].description;
-                myLink.href= patrones[i].action;
+                myLink.href = patrones[i].action;
+                myLink.text = patrones[i].name;
 
                 myArticle.appendChild(myH2);
                 myArticle.appendChild(myPara1);
                 myArticle.appendChild(myLink);
+                myArticle.appendChild(br);
                 section.appendChild(myArticle);
+
             }
 
 
