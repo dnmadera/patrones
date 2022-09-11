@@ -51,4 +51,13 @@ public class Patron {
         this.action = action;
     }
 
+
+    @Override
+    public String toString() {
+        return "Patron{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
