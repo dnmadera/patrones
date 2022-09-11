@@ -28,7 +28,7 @@ class DaoTests {
 		p.setName("NuevoTXT");
 
 		patronService.save(p);
-		assert patronService.findByName("NuevoTXT").getName().equals("NuevoTXT");
+		assert patronService.findByName("NuevoTXT").get(0).getName().equals("NuevoTXT");
 
 	}
 

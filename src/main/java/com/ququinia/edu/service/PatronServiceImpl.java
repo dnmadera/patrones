@@ -19,7 +19,15 @@ class PatronServiceImpl implements PatronService {
         return patronRepository.findAll();
     }
 
-    
+    @Override
+    public Patron save(Patron p) {
+        return patronRepository.save(p);
+    }
 
-  
+    @Override
+    public List<Patron> findByName(String name) {
+        return patronRepository.findByName(name);
+    }
+
+
 }
