@@ -37,15 +37,16 @@ public class FactoryTest {
     @Test
     public void francesTest(){
 
-        Double capital = 25000.0;
-        Integer periodo = 60;
-        Double tem = 12.0/100/12;
+        Double capital = 10000.0;
+        Integer periodo = 12;
+        Double tem = 208.0/100/12;
 
         Amortizacion amort = AmortizacionFactory.getAmortizacion(AmortizacionFactory.FRANCES);
 
         List<Cuota> cuotas = amort.generateFees(capital,periodo, tem);
 
         for (Cuota c: cuotas) {
+            capital -= c.getCapital();
             System.out.println(String.format("cuota %s, restante $%.2f" , c, capital));
 
         }
