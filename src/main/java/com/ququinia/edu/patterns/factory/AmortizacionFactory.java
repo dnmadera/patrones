@@ -1,9 +1,5 @@
 package com.ququinia.edu.patterns.factory;
 
-import com.ququinia.edu.model.Cuota;
-
-import java.util.List;
-
 public class AmortizacionFactory {
 
     public static final String DIRECTA = "directa";

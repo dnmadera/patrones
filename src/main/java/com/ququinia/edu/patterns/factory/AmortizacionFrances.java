@@ -8,8 +8,9 @@ import java.util.List;
 public class AmortizacionFrances implements Amortizacion {
 
     @Override
-    public List<Cuota> generateFees(Double capitalRestante, Integer period, Double tem) {
+    public List<Cuota> generateFees(Double capitalRestante, Integer period, Double tna) {
         List<Cuota> result = new ArrayList<Cuota>();
+        Double tem = tna / 12.0;
 
         //Valor Cuota = C0 * (i / (1-(1+i))^n
         //Ik = I(k-1) * i
